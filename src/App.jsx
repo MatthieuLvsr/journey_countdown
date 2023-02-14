@@ -12,7 +12,7 @@ function App() {
   )
 }
 
-const targetTime = moment("2023-08-15");
+const targetTime = moment("2023-07-28");
 
 export const CountdownMonths = () => {
   const [currentTime, setCurrentTime] = useState(moment());
