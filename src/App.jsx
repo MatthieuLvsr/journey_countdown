@@ -5,107 +5,73 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faPlane } from '@fortawesome/free-solid-svg-icons'
 import './App.css'
 
-function App() {
-
-  return (
-    <CountdownMonths/>
-  )
-}
-
-const targetTime = moment("2023-07-28");
-
-export const CountdownMonths = () => {
-  const [currentTime, setCurrentTime] = useState(moment());
-  const timeBetween = moment.duration(targetTime.diff(currentTime));
+const Countdown = () => {
+  
+  const targetTime = moment("2023-07-28");
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [remaining, setRemaining] = useState({jours:0,heures:0,minutes:0,secondes:0})
+  const [betweenTime, setBetweenTime] = useState(moment());
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTime(moment());
+      const currentTime = moment()
+      let till, days, hours, minutes, seconds
+      const newTime = moment.duration(targetTime.diff(currentTime))
+      setBetweenTime(newTime);
+      days = Math.floor(newTime.asDays())
+      till = newTime.subtract(days,'days')
+      hours = Math.floor(till.asHours())
+      till = till.subtract(hours,'hours')
+      minutes = Math.floor(till.asMinutes())
+      till = till.subtract(minutes, 'minutes')
+      seconds = Math.floor(till.asSeconds())
+      // console.log(hours)
+      const newRemaining = {
+        jours:days,
+        heures:hours,
+        minutes:minutes,
+        secondes:seconds
+      }
+      
+      setRemaining(newRemaining)
+      // setDays(days)
+      // setHours(hours)
+      // setMinutes(minutes)
+      // setSeconds(seconds)
+      for(const [key, value] of Object.entries(newRemaining)){
+        // console.log(key, value)
+      }
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
-
-  return (
-    <div>
-        <span class="fa-stack fa-2x">
-          {/* <i class="fas fa-circle fa-stack-2x"></i> */}
-          <FontAwesomeIcon className="fa-stack-2x" icon={faCircle}/>
-          {/* <i class="fas fa-rocket fa-stack-1x fa-inverse"></i> */}
-          <FontAwesomeIcon className="fa-stack-1x" icon={faPlane}/>
-        </span>
-        <h1>Vacances</h1>
-        <h2>Départ pour le royaume des pates !</h2>
-        	<div className='countdown-wrapper'>
-					{timeBetween.days() && (
-						<div className='countdown-item'>
-							<SVGCircle radius={mapNumber(timeBetween.days(),30,0,0,360)} />
-							{timeBetween.days()} 
-							<span>days</span>
-						</div>
-					)}
-					{timeBetween.hours() && (
-						<div className='countdown-item'>							
-							<SVGCircle radius={mapNumber(timeBetween.days(),30,0,0,360)} />
-							{timeBetween.hours()} 
-							<span>hours</span>
-						</div>
-					)}
-					{timeBetween.minutes() && (
-						<div className='countdown-item'>
-							<SVGCircle radius={mapNumber(timeBetween.days(),30,0,0,360)} />
-							{timeBetween.minutes()} 
-							<span>minutes</span>
-						</div>
-					)}
-					{timeBetween.seconds() && (
-						<div className='countdown-item'>
-							<SVGCircle radius={mapNumber(timeBetween.days(),30,0,0,360)} />
-							{timeBetween.seconds()} 
-							<span>seconds</span>
-						</div>
-					)}
-				</div>
-        <h3>15 Aout 2023</h3>
-        
-      </div>
-  );
-};
-
-const SVGCircle = ({ radius }) => (
-	<svg className='countdown-svg'>
-		<path fill="none" stroke="#c44394" stroke-width="4" d={describeArc(50, 50, 48, 0, radius)}/>
-	</svg>
-);
-
-// From stackoverflow: https://stackoverflow.com/questions/5736398/how-to-calculate-the-svg-path-for-an-arc-of-a-circle
-function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-  var angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
-
-  return {
-    x: centerX + (radius * Math.cos(angleInRadians)),
-    y: centerY + (radius * Math.sin(angleInRadians))
-  };
+  
+  return(
+    <>
+      <span class="fa-stack fa-2x">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fas fa-rocket fa-stack-1x fa-inverse"></i>
+      </span>
+      <h1>Vacances</h1>
+      <h2>Voyage au pays des pâtes</h2>
+      <div className="counter">
+            {Object.entries(remaining).map((el, i) => (
+              <div key={i} className="entry">
+                <div key={el[1]} className="entry-value">
+                  <span className="count top curr flipTop">{el[1] + 1}</span>
+                  <span className="count top next">{el[1]}</span>
+                  <span className="count bottom next flipBottom">{el[1]}</span>
+                  <span className="count bottom curr">{el[1] + 1}</span>
+                </div>
+                <div className="entry-title">{el[0].toUpperCase()}</div>
+              </div>
+            ))}
+          </div>
+    </>
+  )
 }
 
-function describeArc(x, y, radius, startAngle, endAngle){
-
-    var start = polarToCartesian(x, y, radius, endAngle);
-    var end = polarToCartesian(x, y, radius, startAngle);
-
-    var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-
-    var d = [
-        "M", start.x, start.y, 
-        "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
-    ].join(" ");
-
-    return d;       
-}
-
-// Stackoverflow: https://stackoverflow.com/questions/10756313/javascript-jquery-map-a-range-of-numbers-to-another-range-of-numbers
-function mapNumber(number, in_min, in_max, out_min, out_max) {
-  return (number - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
-
-export default App
+ReactDOM.render(<Countdown/>,document.getElementById('root'))
