@@ -1,8 +1,9 @@
+/* //GET THE GOOGLE FONT SPECIMENS */
 @import url('https://fonts.googleapis.com/css?family=Lobster');
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
 html {
-  /* //VARIABLES BECAUSE NATIVE CSS IS COOL TOO */
+/*   VARIABLES BECAUSE NATIVE CSS IS COOL TOO */
   --bg-one: #973999;
   --bg-two: #f8598b;
   --bg-three: #f7bf00;
@@ -12,15 +13,30 @@ html {
   --color-fun: #c44394;
 }
 
+body, html {
+  height: 100%;
+}
+
 body {
   color: var(--color-headings);
   background: var(--bg);
   background-image: linear-gradient(to bottom right, var(--bg-one), var(--bg-two), var(--bg-three));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Muli', sans-serif;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
+}
+/* countdown component styles */
+.counter {
+  // margin: 0 -5px;
   text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+  background-color: rgba(0,0,0,0.6);
 }
 
 h1 {
@@ -30,51 +46,93 @@ h1 {
   text-shadow: 2px 2px 3px rgba(0,0,0,0.3);
 }
 
-.fa-stack {
-  font-size: 50px;
-  text-shadow: 2px 2px 3px rgba(0,0,0,0.3);
-}
-.fa-stack .fa-stack-1x {
-  text-shadow: none;
-  color: var(--color-fun);
+.entry {
+  text-align: center;
+  padding: 5px;
 }
 
-.countdown-wrapper {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-wrap: wrap;
-  background: var(--bg-panel);
-  border-radius: 10px;
-  box-shadow: 4px 4px 12px 2px rgba(black, 0.30);
-  padding: 40px 40px 30px;
+ .entry .entry-value {
+    position: relative;
+    height: 95px;
+    perspective: 200px;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    transform: translate3d(0, 0, 0);
+    margin: 0 auto;
+  }
+
+ .entry .entry-title {
+    min-width: 80px;
+    color: #fff;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+.count {
+  background-color: #202020;
+  color: #fff;
+  display: block;
+  font-size: 2em;
+  line-height: 2.4em;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100%;
 }
 
-.countdown-item {
-	color: var(--color-text);
-	font-size: 40px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-  line-height: 30px;
-	margin: 10px;
-  padding-top: 10px;
-	position: relative;
-	width: 100px;
-	height: 100px;
+  .count.top {
+    height: 50%;
+    line-height: 95px;
+    transform-origin: 50% 100%;
+  }
+
+  .count.bottom {
+    line-height: 0;
+    height: 50%;
+    top: 50%;
+    transform-origin: 50% 0;
+  }
+
+  .count.flipTop {
+    animation-name: flipTop;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    z-index: 1;
+  }
+  .count.flipBottom {
+    animation-name: flipBottom;
+    animation-duration: 0.3s;
+    animation-delay: 0.3s;
+    animation-fill-mode: both;
+    z-index: 1;
+  }
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+  text-align: center;
 }
 
-.countdown-item span {
-	color: var(--color-text);
-	font-size: 12px;
-	text-transform: uppercase;
+@keyframes flipTop {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(-90deg);
+  }
 }
-
-.countdown-svg {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100px;
-	height: 100px;
+@keyframes flipBottom {
+  from {
+    transform: rotateX(90deg);
+  }
+  to {
+    transform: rotateX(0deg);
+  }
 }
