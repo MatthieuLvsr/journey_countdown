@@ -5,6 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faPlane } from '@fortawesome/free-solid-svg-icons'
 import './App.css'
 
+function App() {
+
+  return (
+    <Countdown/>
+  )
+}
+
 const Countdown = () => {
   
   const targetTime = moment("2023-07-28");
@@ -74,4 +81,4 @@ const Countdown = () => {
   )
 }
 
-ReactDOM.render(<Countdown/>,document.getElementById('root'))
+export defaut App
