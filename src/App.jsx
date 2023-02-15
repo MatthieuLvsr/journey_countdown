@@ -60,8 +60,8 @@ const Countdown = () => {
     <>
       <div className="title">
       <span class="fa-stack fa-2x">
-        <FontAwesomeIcon icon="fas fa-circle fa-stack-2x" />
-        <FontAwesomeIcon icon="fas fa-plane fa-stack-1x fa-inverse" />
+        <FontAwesomeIcon className="fa-stack-2x" icon={faCircle} />
+        <FontAwesomeIcon className="fa-stack-1x fa-inverse" icon={faPlane} />
       </span>
       <h1>Vacances</h1>
       <h2>Voyage au pays des pâtes</h2>
