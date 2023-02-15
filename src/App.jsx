@@ -81,4 +81,4 @@ const Countdown = () => {
   )
 }
 
-export defaut App
+export default App
