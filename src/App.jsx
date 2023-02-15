@@ -58,6 +58,7 @@ const Countdown = () => {
   
   return(
     <>
+      <div className="title">
       <span class="fa-stack fa-2x">
         <i class="fas fa-circle fa-stack-2x"></i>
         <i class="fas fa-rocket fa-stack-1x fa-inverse"></i>
@@ -77,6 +78,7 @@ const Countdown = () => {
               </div>
             ))}
           </div>
+      </div>
     </>
   )
 }
