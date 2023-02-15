@@ -28,6 +28,7 @@ body {
   align-items: center;
   justify-content: center;
   font-family: 'Muli', sans-serif;
+  overflow: hidden;
 }
 /* countdown component styles */
 .counter {
@@ -79,6 +80,7 @@ h1 {
   text-align: center;
   top: 0;
   width: 100%;
+  margin: 5px;
 }
 
   .count.top {
