@@ -1,12 +1,10 @@
-
 import React, { useEffect, useState } from "react";
 import moment from "moment";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle, faPlane } from '@fortawesome/free-solid-svg-icons'
+import Icon from "./Icon";
+import SVG from "./Svg";
 import './App.css'
 
 function App() {
-
   return (
     <Countdown/>
   )
@@ -58,11 +56,9 @@ const Countdown = () => {
   
   return(
     <>
+      <SVG size={"100%"} strokeColor={"#ffffff"} fillColor={"#ade8a6"}/>
       <div className="title">
-      <span class="fa-stack fa-2x">
-    {/*<FontAwesomeIcon className="fa-stack-2x" icon={faCircle} />
-        <FontAwesomeIcon className="fa-stack-1x fa-inverse" icon={faPlane} />*/}
-      </span>
+        <Icon/>
       <h1>Vacances</h1>
       <h2>Voyage au pays des pâtes</h2>
       <div className="counter">
